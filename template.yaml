@@ -22,11 +22,6 @@ Resources:
           Properties:
             Path: '/message'
             Method: get
-        HelloHandler:
-          Type: Api
-          Properties:
-            Path: '/job'
-            Method: post
 
 Outputs:
   Endpoint:

@@ -34,8 +34,10 @@ func MessageHandler(w http.ResponseWriter, r *http.Request) {
 
 // RegisterRoutes registers the API's routes.
 func RegisterRoutes() {
+	// TODO: currently allows any HTTP method
 	http.Handle("/", h(RootHandler))
 	http.Handle("/message", h(MessageHandler))
+	// http.Handle("/images", h(ListImagesHandler))
 }
 
 // h wraps a http.HandlerFunc and adds common headers.
