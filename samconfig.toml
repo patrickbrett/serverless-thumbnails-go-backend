@@ -1,0 +1,10 @@
+version = 0.1
+[default]
+[default.deploy]
+[default.deploy.parameters]
+stack_name = "serverless-thumbnails-go-backend"
+s3_bucket = "aws-sam-cli-managed-default-samclisourcebucket-13e1sa9930l7j"
+s3_prefix = "serverless-thumbnails-go-backend"
+region = "ap-southeast-2"
+confirm_changeset = true
+capabilities = "CAPABILITY_IAM"
