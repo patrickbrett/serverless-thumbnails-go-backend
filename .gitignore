@@ -6,3 +6,4 @@
 /worker
 /packaged.yaml
 .aws-sam/
+packaged.yaml
