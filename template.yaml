@@ -36,6 +36,11 @@ Resources:
           Properties:
             Path: '/'
             Method: get
+        MessageHandler:
+          Type: Api
+          Properties:
+            Path: '/message'
+            Method: get
         HelloHandler:
           Type: Api
           Properties:

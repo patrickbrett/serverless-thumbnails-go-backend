@@ -5,3 +5,4 @@
 /vendor
 /worker
 /packaged.yaml
+.aws-sam/

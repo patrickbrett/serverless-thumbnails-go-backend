@@ -31,12 +31,20 @@ type JobResponse struct {
 // WelcomeMessageResponse is the response returned by the / endpoint.
 var WelcomeMessageResponse = MessageResponse{"Welcome to the example API!"}
 
+// AltWelcomeMessageResponse is the response returned by the /message endpoint.
+var AltWelcomeMessageResponse = MessageResponse{"Here's another message!"}
+
 // JobMessage is the message sent in JobResponse responses.
 var JobMessage = "Job sent to queue."
 
 // RootHandler is a http.HandlerFunc for the / endpoint.
 func RootHandler(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(WelcomeMessageResponse)
+}
+
+// MessageHandler is a http.HandlerFunc for the /message endpoint.
+func MessageHandler(w http.ResponseWriter, r *http.Request) {
+	json.NewEncoder(w).Encode(AltWelcomeMessageResponse)
 }
 
 // JobHandler implements http.Handler for the /job endpoint.
@@ -77,6 +85,7 @@ func RegisterRoutes() {
 	svc := sqs.New(sess)
 
 	http.Handle("/", h(RootHandler))
+	http.Handle("/message", h(MessageHandler))
 	http.Handle("/job", h(JobHandlerFunc(svc)))
 }
 
