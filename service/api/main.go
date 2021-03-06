@@ -16,28 +16,26 @@ type MessageResponse struct {
 	Message string `json:"message"`
 }
 
-// WelcomeMessageResponse is the response returned by the / endpoint.
-var WelcomeMessageResponse = MessageResponse{"Welcome to the example API!"}
-
-// AltWelcomeMessageResponse is the response returned by the /message endpoint.
-var AltWelcomeMessageResponse = MessageResponse{"Here's another message!"}
-
-// RootHandler is a http.HandlerFunc for the / endpoint.
-func RootHandler(w http.ResponseWriter, r *http.Request) {
-	json.NewEncoder(w).Encode(WelcomeMessageResponse)
-}
+// WelcomeMessageResponse is the response returned by the /message endpoint.
+var WelcomeMessageResponse = MessageResponse{"Test message!"}
 
 // MessageHandler is a http.HandlerFunc for the /message endpoint.
 func MessageHandler(w http.ResponseWriter, r *http.Request) {
-	json.NewEncoder(w).Encode(AltWelcomeMessageResponse)
+	json.NewEncoder(w).Encode(WelcomeMessageResponse)
+}
+
+// ListImagesHandler is a http.HandlerFunc for the /images endpoint.
+func ListImagesHandler(w http.ResponseWriter, r *http.Request) {
+	objects := listObjects()
+
+	json.NewEncoder(w).Encode(objects)
 }
 
 // RegisterRoutes registers the API's routes.
 func RegisterRoutes() {
 	// TODO: currently allows any HTTP method
-	http.Handle("/", h(RootHandler))
 	http.Handle("/message", h(MessageHandler))
-	// http.Handle("/images", h(ListImagesHandler))
+	http.Handle("/images", h(ListImagesHandler))
 }
 
 // h wraps a http.HandlerFunc and adds common headers.
