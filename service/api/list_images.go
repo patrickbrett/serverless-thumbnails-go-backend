@@ -8,7 +8,7 @@ import (
 	"fmt"
 )
 
-func listObjects() []string {
+func listImages() []string {
 	bucket := "npb-source-bucket-sourcebucket-96mim45irkcp"
 	prefix := "images/train"
 	keyLimit := int64(1000)

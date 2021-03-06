@@ -24,18 +24,22 @@ func MessageHandler(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(WelcomeMessageResponse)
 }
 
-// ListImagesHandler is a http.HandlerFunc for the /images endpoint.
-func ListImagesHandler(w http.ResponseWriter, r *http.Request) {
-	objects := listObjects()
-
-	json.NewEncoder(w).Encode(objects)
+// ImagesHandler is a http.HandlerFunc for the /images endpoint.
+func ImagesHandler(w http.ResponseWriter, r *http.Request) {
+	if r.Method == http.MethodGet {
+		objects := listImages()
+		json.NewEncoder(w).Encode(objects)
+	} else if r.Method == http.MethodPut {
+		signed := postImage()
+		json.NewEncoder(w).Encode(signed)
+	}
 }
 
 // RegisterRoutes registers the API's routes.
 func RegisterRoutes() {
 	// TODO: currently allows any HTTP method
 	http.Handle("/message", h(MessageHandler))
-	http.Handle("/images", h(ListImagesHandler))
+	http.Handle("/images", h(ImagesHandler))
 }
 
 // h wraps a http.HandlerFunc and adds common headers.
