@@ -37,7 +37,6 @@ func ImagesHandler(w http.ResponseWriter, r *http.Request) {
 
 // RegisterRoutes registers the API's routes.
 func RegisterRoutes() {
-	// TODO: currently allows any HTTP method
 	http.Handle("/message", h(MessageHandler))
 	http.Handle("/images", h(ImagesHandler))
 }
