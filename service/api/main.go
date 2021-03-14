@@ -30,8 +30,16 @@ func ImagesHandler(w http.ResponseWriter, r *http.Request) {
 		objects := listImages()
 		json.NewEncoder(w).Encode(objects)
 	} else if r.Method == http.MethodPut {
-		signed := postImage()
+		signed := putImage()
 		json.NewEncoder(w).Encode(signed)
+	}
+}
+
+// LabelsHandler is a http.HandlerFunc for the /images endpoint.
+func LabelsHandler(w http.ResponseWriter, r *http.Request) {
+	if r.Method == http.MethodGet {
+		objects := getLabels(r)
+		json.NewEncoder(w).Encode(objects)
 	}
 }
 
@@ -39,6 +47,7 @@ func ImagesHandler(w http.ResponseWriter, r *http.Request) {
 func RegisterRoutes() {
 	http.Handle("/message", h(MessageHandler))
 	http.Handle("/images", h(ImagesHandler))
+	http.Handle("/labels", h(LabelsHandler))
 }
 
 // h wraps a http.HandlerFunc and adds common headers.

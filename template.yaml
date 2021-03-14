@@ -4,7 +4,7 @@ Transform: AWS::Serverless-2016-10-31
 Description: An example serverless API written in Golang.
 
 Resources:
-  Api:
+  ApiFunction:
     Type: AWS::Serverless::Function
     Properties:
       Runtime: go1.x
@@ -14,10 +14,29 @@ Resources:
         CatchAllHandler:
           Type: Api
           Properties:
+            RestApiId: ApiGatewayApi
             Path: /{proxy+}
             Method: ANY
-            Cors:
-              AllowOrigin: '*'
+      Policies:
+        - AmazonS3FullAccess
+  
+  ApiGatewayApi:
+    Type: AWS::Serverless::Api
+    Properties:
+      StageName: Prod
+      Cors:
+        AllowMethods: "'POST, GET, PUT'"
+        AllowOrigin: "'*'"
+  
+  ConfigLambdaPermission:
+    Type: "AWS::Lambda::Permission"
+    DependsOn:
+    - ApiGatewayApi
+    - ApiFunction
+    Properties:
+      Action: lambda:InvokeFunction
+      FunctionName: !Ref ApiFunction
+      Principal: apigateway.amazonaws.com
   
   S3EventHandler:
     Type: AWS::Serverless::Function
@@ -28,4 +47,4 @@ Resources:
 
 Outputs:
   Endpoint:
-    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/"
+    Value: !Sub "https://${ApiGatewayApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/"

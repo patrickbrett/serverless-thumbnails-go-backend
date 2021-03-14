@@ -10,11 +10,11 @@ import (
 	"github.com/google/uuid"
 )
 
-func postImage() interface{} {
+func putImage() interface{} {
 	bucket := "thumbnails-go-angular"
 	prefix := "full-size"
 
-	filename := uuid.New().String()
+	filename := uuid.New().String() + ".jpg"
 	s3Key := prefix + "/" + filename
 
 	fmt.Print(filename)
@@ -25,7 +25,7 @@ func postImage() interface{} {
 
 	client := s3.New(sess)
 
-	req, _ := client.GetObjectRequest(&s3.GetObjectInput{
+	req, _ := client.PutObjectRequest(&s3.PutObjectInput{
 		Bucket: aws.String(bucket),
 		Key:    aws.String(s3Key),
 	})
