@@ -1,6 +1,7 @@
 /*.zip
 /aws-sam-golang-example
 /api
+/s3_event_handler
 /error
 /vendor
 /worker

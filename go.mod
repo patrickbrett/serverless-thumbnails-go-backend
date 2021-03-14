@@ -3,7 +3,7 @@ module github.com/patrickbrett/serverless-thumbnails-go-backend
 go 1.14
 
 require (
-	github.com/BurntSushi/graphics-go v0.0.0-20160129215708-b43f31a4a966 // indirect
+	github.com/BurntSushi/graphics-go v0.0.0-20160129215708-b43f31a4a966
 	github.com/apex/gateway v1.1.2
 	github.com/aws/aws-lambda-go v1.23.0
 	github.com/aws/aws-sdk-go v1.37.25

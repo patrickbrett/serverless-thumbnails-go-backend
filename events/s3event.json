@@ -3,10 +3,10 @@
     {
       "S3": {
         "Bucket": {
-          "Name": ""
+          "Name": "npb-source-bucket-sourcebucket-96mim45irkcp"
         },
         "Object": {
-          "Key": ""
+          "Key": "images/train/008_thumbnails_9.jpg"
         }
       }
     }
