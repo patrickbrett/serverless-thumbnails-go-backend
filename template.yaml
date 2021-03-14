@@ -4,7 +4,6 @@ Transform: AWS::Serverless-2016-10-31
 Description: An example serverless API written in Golang.
 
 Resources:
-
   Api:
     Type: AWS::Serverless::Function
     Properties:
@@ -17,6 +16,13 @@ Resources:
           Properties:
             Path: /{proxy+}
             Method: ANY
+  
+  S3EventHandler:
+    Type: AWS::Serverless::Function
+    Properties:
+      Runtime: go1.x
+      Handler: s3_event_handler
+      Timeout: 10
 
 Outputs:
   Endpoint:
